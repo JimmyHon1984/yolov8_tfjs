@@ -336,6 +336,9 @@ const ObjectDetectionPage = ({ model, trainedModels, onReturnHome }) => {
   // 當圖片加載完成後自動進行檢測
   const handleImageLoad = () => {
     console.log("Image loaded successfully:", imageRef.current?.src);
+    // In handleImageLoad in ObjectDetectionPage.jsx
+    console.log("Image dimensions:", imageRef.current.width, imageRef.current.height);
+    console.log("Canvas dimensions:", canvasRef.current.width, canvasRef.current.height);
     
     if (imageRef.current && canvasRef.current) {
     // Get the natural (original) dimensions of the image
@@ -380,18 +383,22 @@ const ObjectDetectionPage = ({ model, trainedModels, onReturnHome }) => {
         canvasRef.current.style.width = `${displayWidth}px`;
         canvasRef.current.style.height = `${displayHeight}px`;
         
-    // Now we need to modify the detection process to account for our display dimensions
     const detectWithCorrectRatios = () => {
-      // The key fix: we're creating a custom function that will modify the detection process
-      // to ensure the bounding boxes stay within our image boundaries
-      
-      detect(
-        imageRef.current, 
-        model, 
-        canvasRef.current, 
-        null, 
-        updateMetrics
-      );
+    // Calculate the display scale factor relative to the original image
+    const displayScaleX = displayWidth / naturalWidth;
+    const displayScaleY = displayHeight / naturalHeight;
+    
+    detect(
+      imageRef.current, 
+      model, 
+      canvasRef.current, 
+      () => {
+        console.log("Detection completed with correct scaling");
+        setIsDetecting(false);
+      }, 
+      updateMetrics,
+      displayScaleX  // Pass this as the displayRatio parameter
+    );
   };
     
     detectWithCorrectRatios();

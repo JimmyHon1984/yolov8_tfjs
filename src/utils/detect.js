@@ -48,14 +48,14 @@ const preprocess = (source, modelWidth, modelHeight, displayRatio = 1.0) => {
  * @param {Function} callback function to run after detection process
  * @param {Function} updateMetrics function to update metrics data
  */
-export const detect = async (source, model, canvasRef, callback = () => {}, updateMetrics = null) => {
+export const detect = async (source, model, canvasRef, callback = () => {}, updateMetrics = null, displayRatio = 1.0) => {
   const [modelWidth, modelHeight] = model.inputShape.slice(1, 3); // get model width and height
 
   // Start timing the inference
   const inferenceStartTime = performance.now();
   
-  tf.engine().startScope(); // start scoping tf engine
-  const [input, xRatio, yRatio] = preprocess(source, modelWidth, modelHeight); // preprocess image
+  tf.engine().startScope(); // start scoping tf enginef
+  const [input, xRatio, yRatio] = preprocess(source, modelWidth, modelHeight, displayRatio); // preprocess image
 
   const res = model.net.execute(input); // inference model
   const transRes = res.transpose([0, 2, 1]); // transpose result [b, det, n] => [b, n, det]
@@ -88,7 +88,9 @@ export const detect = async (source, model, canvasRef, callback = () => {}, upda
   const boxes_data = boxes.gather(nms, 0).dataSync(); // indexing boxes by nms index
   const scores_data = scores.gather(nms, 0).dataSync(); // indexing scores by nms index
   const classes_data = classes.gather(nms, 0).dataSync(); // indexing classes by nms index
-
+  // In detect.js, before calling renderBoxes
+  console.log("Bounding box data:", boxes_data);
+  console.log("Ratios:", xRatio, yRatio);
   renderBoxes(canvasRef, boxes_data, scores_data, classes_data, [xRatio, yRatio]); // render boxes
   tf.dispose([res, transRes, boxes, scores, classes, nms]); // clear memory
 
