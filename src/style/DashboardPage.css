@@ -1,0 +1,192 @@
+.dashboard-container {
+  min-height: 100vh;
+  background-color: #f7f9fc;
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, #4A6FFF 0%, #1A237E 100%);
+  padding: 48px;
+  color: white;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-header h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.dashboard-subtitle {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.dashboard-section {
+  margin-bottom: 60px;
+}
+
+.dashboard-section h2 {
+  font-size: 28px;
+  margin-bottom: 32px;
+  color: #2c3e50;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 32px;
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+  display: flex;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+  width: 120px;
+  background-color: #e3f2fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon svg {
+  width: 60px;
+  height: 60px;
+  color: #4A6FFF;
+}
+
+.card-content {
+  padding: 32px;
+  flex: 1;
+}
+
+.card-content h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding: 0;
+  border: none;
+}
+
+.card-content p {
+  color: #7f8c8d;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.card-features {
+  list-style-type: none;
+  margin: 0 0 24px 0;
+  padding: 0;
+}
+
+.card-features li {
+  padding: 8px 0 8px 28px;
+  position: relative;
+  color: #5d6d7e;
+}
+
+.card-features li::before {
+  content: "✓";
+  color: #4A6FFF;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.card-button {
+  background-color: #4A6FFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card-button:hover {
+  background-color: #3654cc;
+}
+
+.tips-section {
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.tips-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tip-icon {
+  font-size: 24px;
+  margin-right: 16px;
+  background-color: #e3f2fd;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tip-content h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.tip-content p {
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-card {
+    flex-direction: column;
+  }
+  
+  .card-icon {
+    width: 100%;
+    padding: 24px 0;
+  }
+  
+  .tips-container {
+    grid-template-columns: 1fr;
+  }
+}

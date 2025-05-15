@@ -11,7 +11,8 @@ const numClass = labels.length;
  * @param {Number} modelHeight
  * @returns input tensor, xRatio and yRatio
  */
-const preprocess = (source, modelWidth, modelHeight) => {
+// At the beginning of the preprocess function, add this modification
+const preprocess = (source, modelWidth, modelHeight, displayRatio = 1.0) => {
   let xRatio, yRatio; // ratios for boxes
 
   const input = tf.tidy(() => {
@@ -26,8 +27,9 @@ const preprocess = (source, modelWidth, modelHeight) => {
       [0, 0],
     ]);
 
-    xRatio = maxSize / w; // update xRatio
-    yRatio = maxSize / h; // update yRatio
+    // Calculate ratios properly accounting for display dimensions
+    xRatio = (maxSize / w) * displayRatio; 
+    yRatio = (maxSize / h) * displayRatio;
 
     return tf.image
       .resizeBilinear(imgPadded, [modelWidth, modelHeight]) // resize frame

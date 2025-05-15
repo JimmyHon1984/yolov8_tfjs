@@ -22,37 +22,44 @@ export const renderBoxes = (canvasRef, boxes_data, scores_data, classes_data, ra
   ctx.font = font;
   ctx.textBaseline = "top";
 
+  // Scale factor for the canvas
+  const canvasWidth = ctx.canvas.width;
+  const canvasHeight = ctx.canvas.height;
   for (let i = 0; i < scores_data.length; ++i) {
-    // filter based on class threshold
     const klass = labels[classes_data[i]];
     const color = colors.get(classes_data[i]);
     const score = (scores_data[i] * 100).toFixed(1);
 
+    // Get coordinates and apply correct scaling
     let [y1, x1, y2, x2] = boxes_data.slice(i * 4, (i + 1) * 4);
+    
+    // Apply ratio scaling from the model's preprocessing
     x1 *= ratios[0];
     x2 *= ratios[0];
     y1 *= ratios[1];
     y2 *= ratios[1];
+    
+    // Calculate width and height
     const width = x2 - x1;
     const height = y2 - y1;
 
-    // draw box.
+    // Draw box with adjusted coordinates
     ctx.fillStyle = Colors.hexToRgba(color, 0.2);
     ctx.fillRect(x1, y1, width, height);
 
-    // draw border box.
+    // Draw border box
     ctx.strokeStyle = color;
-    ctx.lineWidth = Math.max(Math.min(ctx.canvas.width, ctx.canvas.height) / 200, 2.5);
+    ctx.lineWidth = Math.max(Math.min(canvasWidth, canvasHeight) / 200, 2.5);
     ctx.strokeRect(x1, y1, width, height);
 
-    // Draw the label background.
+    // Draw the label background
     ctx.fillStyle = color;
     const textWidth = ctx.measureText(klass + " - " + score + "%").width;
-    const textHeight = parseInt(font, 10); // base 10
+    const textHeight = parseInt(font, 10);
     const yText = y1 - (textHeight + ctx.lineWidth);
     ctx.fillRect(
       x1 - 1,
-      yText < 0 ? 0 : yText, // handle overflow label box
+      yText < 0 ? 0 : yText,
       textWidth + ctx.lineWidth,
       textHeight + ctx.lineWidth
     );

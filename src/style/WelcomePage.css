@@ -1,0 +1,245 @@
+.welcome-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f7f9fc 0%, #e3f2fd 100%);
+}
+
+.welcome-content {
+  flex: 1;
+  max-width: 50%;
+  padding: 80px 60px;
+  display: flex;
+    flex-direction: column;
+  }
+  
+.welcome-content h1 {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #2c3e50;
+  line-height: 1.2;
+  }
+
+.welcome-subtitle {
+  font-size: 24px;
+  margin-bottom: 48px;
+  color: #5d6d7e;
+  line-height: 1.5;
+}
+
+.welcome-features {
+  margin-bottom: 48px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.feature-icon {
+  font-size: 32px;
+  margin-right: 24px;
+  background-color: #e3f2fd;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.feature-text h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.feature-text p {
+  font-size: 16px;
+  color: #5d6d7e;
+  line-height: 1.6;
+}
+
+.start-button {
+  background-color: #4A6FFF;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 16px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(74, 111, 255, 0.2);
+  align-self: flex-start;
+}
+
+.start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(74, 111, 255, 0.3);
+}
+
+.welcome-illustration {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.welcome-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* AI Brain Animation */
+.ai-brain-animation {
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+.brain-container {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 50px;
+  left: 50px;
+}
+
+.brain-center {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: #4A6FFF;
+  border-radius: 50%;
+  top: 110px;
+  left: 110px;
+  animation: pulse 3s infinite;
+  box-shadow: 0 0 30px rgba(74, 111, 255, 0.6);
+}
+
+.brain-node {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #64B5F6;
+  border-radius: 50%;
+}
+
+.n1 { top: 30px; left: 135px; animation: float 4s infinite; }
+.n2 { top: 70px; left: 40px; animation: float 5s infinite 0.5s; }
+.n3 { top: 135px; left: 20px; animation: float 4.5s infinite 1s; }
+.n4 { top: 225px; left: 60px; animation: float 3.5s infinite 0.2s; }
+.n5 { top: 240px; left: 165px; animation: float 4.8s infinite 0.7s; }
+.n6 { top: 135px; left: 250px; animation: float 4.2s infinite 1.2s; }
+
+.brain-connection {
+  position: absolute;
+  background: linear-gradient(to right, rgba(74, 111, 255, 0.2), rgba(74, 111, 255, 0.8));
+  height: 4px;
+}
+
+.c1 {
+  width: 100px;
+  top: 45px;
+  left: 150px;
+  transform: rotate(75deg);
+  transform-origin: left center;
+}
+
+.c2 {
+  width: 120px;
+  top: 85px;
+  left: 70px;
+  transform: rotate(20deg);
+  transform-origin: left center;
+}
+
+.c3 {
+  width: 100px;
+  top: 140px;
+  left: 40px;
+  transform: rotate(-10deg);
+  transform-origin: left center;
+}
+
+.c4 {
+  width: 110px;
+  top: 230px;
+  left: 80px;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+}
+
+.c5 {
+  width: 90px;
+  top: 240px;
+  left: 170px;
+  transform: rotate(-90deg);
+  transform-origin: left center;
+}
+
+.c6 {
+  width: 100px;
+  top: 140px;
+  left: 230px;
+  transform: rotate(180deg);
+  transform-origin: left center;
+}
+
+.detection-box {
+  position: absolute;
+  width: 280px;
+  height: 140px;
+  border: 4px dashed #FF5252;
+  top: 130px;
+  left: 60px;
+  animation: blink 2s infinite;
+  opacity: 0.8;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes blink {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.5; }
+}
+
+@media (max-width: 1200px) {
+  .welcome-container {
+    flex-direction: column;
+  }
+  
+  .welcome-content,
+  .welcome-illustration {
+    max-width: 100%;
+    padding: 40px;
+  }
+  
+  .welcome-content {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .start-button {
+    align-self: center;
+  }
+}

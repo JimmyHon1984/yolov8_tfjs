@@ -1,11 +1,12 @@
+/* 全局樣式 */
 .App {
   height: 100%;
-  padding: 0 10px;
+  padding: 0;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 
 .App > * {
@@ -55,19 +56,90 @@
   height: 100%;
 }
 
-button {
-  text-decoration: none;
+.primary-button {
+  background-color: #4A6FFF;
   color: white;
-  background-color: black;
-  border: 2px solid black;
-  margin: 0 5px;
-  padding: 5px;
-  border-radius: 5px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-  color: black;
-  background-color: white;
-  border: 2px solid black;
+.primary-button:hover {
+  background-color: #3654cc;
+}
+
+.primary-button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background-color: #f0f2f5;
+  color: #4A6FFF;
+  border: 1px solid #4A6FFF;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.secondary-button:hover {
+  background-color: #e6e9f0;
+}
+
+.input-group {
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #4A6FFF;
+  box-shadow: 0 0 0 2px rgba(74, 111, 255, 0.2);
+}
+
+.success-message {
+  background-color: #e6f7e9;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 16px 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
 }

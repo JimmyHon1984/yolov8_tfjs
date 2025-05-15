@@ -1,0 +1,101 @@
+.user-info-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f7f9fc;
+}
+
+.user-info-left {
+  flex: 1;
+  background: linear-gradient(135deg, #4A6FFF 0%, #1A237E 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-illustration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-icon {
+  font-size: 120px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-text {
+  font-size: 32px;
+  font-weight: 600;
+  color: white;
+}
+
+.user-info-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.user-info-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: 48px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.user-info-card h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #2c3e50;
+}
+
+.form-subtitle {
+  color: #7f8c8d;
+  margin-bottom: 32px;
+}
+
+.form-note {
+  color: #95a5a6;
+  font-size: 14px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #4A6FFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 24px;
+}
+
+.submit-button:hover {
+  background-color: #3654cc;
+}
+
+@media (max-width: 1024px) {
+  .user-info-container {
+    flex-direction: column;
+  }
+  
+  .user-info-left {
+    min-height: 300px;
+  }
+}
