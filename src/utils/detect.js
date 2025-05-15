@@ -43,11 +43,15 @@ const preprocess = (source, modelWidth, modelHeight) => {
  * @param {HTMLImageElement|HTMLVideoElement} source
  * @param {tf.GraphModel} model loaded YOLOv8 tensorflow.js model
  * @param {HTMLCanvasElement} canvasRef canvas reference
- * @param {VoidFunction} callback function to run after detection process
+ * @param {Function} callback function to run after detection process
+ * @param {Function} updateMetrics function to update metrics data
  */
-export const detect = async (source, model, canvasRef, callback = () => {}) => {
+export const detect = async (source, model, canvasRef, callback = () => {}, updateMetrics = null) => {
   const [modelWidth, modelHeight] = model.inputShape.slice(1, 3); // get model width and height
 
+  // Start timing the inference
+  const inferenceStartTime = performance.now();
+  
   tf.engine().startScope(); // start scoping tf engine
   const [input, xRatio, yRatio] = preprocess(source, modelWidth, modelHeight); // preprocess image
 
@@ -86,18 +90,37 @@ export const detect = async (source, model, canvasRef, callback = () => {}) => {
   renderBoxes(canvasRef, boxes_data, scores_data, classes_data, [xRatio, yRatio]); // render boxes
   tf.dispose([res, transRes, boxes, scores, classes, nms]); // clear memory
 
+  // End timing the inference
+  const inferenceTime = performance.now() - inferenceStartTime;
+  
+  // If updateMetrics function is provided, call it with the inference time
+  if (updateMetrics) {
+    updateMetrics(inferenceTime);
+  }
+
   callback();
 
   tf.engine().endScope(); // end of scoping
 };
+
+// Variables to track FPS calculation
+let frameCount = 0;
+let lastFPSUpdateTime = 0;
+let currentFPS = 0;
 
 /**
  * Function to detect video from every source.
  * @param {HTMLVideoElement} vidSource video source
  * @param {tf.GraphModel} model loaded YOLOv8 tensorflow.js model
  * @param {HTMLCanvasElement} canvasRef canvas reference
+ * @param {Function} updateMetrics function to update metrics data
  */
-export const detectVideo = (vidSource, model, canvasRef) => {
+export const detectVideo = (vidSource, model, canvasRef, updateMetrics = null) => {
+  // Reset FPS tracking variables when starting a new video detection
+  frameCount = 0;
+  lastFPSUpdateTime = performance.now();
+  currentFPS = 0;
+  
   /**
    * Function to detect every frame from video
    */
@@ -108,9 +131,28 @@ export const detectVideo = (vidSource, model, canvasRef) => {
       return; // handle if source is closed
     }
 
+    // Update FPS calculation
+    frameCount++;
+    const now = performance.now();
+    const elapsed = now - lastFPSUpdateTime;
+    
+    // Update FPS every half second
+    if (elapsed > 500) {
+      currentFPS = Math.round((frameCount * 1000) / elapsed);
+      frameCount = 0;
+      lastFPSUpdateTime = now;
+    }
+
+    // Pass the FPS to the updateMetrics function
+    const updateFrameMetrics = (inferenceTime) => {
+      if (updateMetrics) {
+        updateMetrics(inferenceTime, currentFPS);
+      }
+    };
+
     detect(vidSource, model, canvasRef, () => {
       requestAnimationFrame(detectFrame); // get another frame
-    });
+    }, updateFrameMetrics);
   };
 
   detectFrame(); // initialize to detect every frame
