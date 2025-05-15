@@ -1,13 +1,3 @@
-# Object Detection using YOLOv8 and Tensorflow.js
-
-<p align="center">
-  <img src="./sample.png" />
-</p>
-
-![love](https://img.shields.io/badge/Made%20with-🖤-white)
-![tensorflow.js](https://img.shields.io/badge/tensorflow.js-white?logo=tensorflow)
-
----
 
 Object Detection application right in your browser. Serving YOLOv8 in browser using tensorflow.js
 with `webgl` backend.
